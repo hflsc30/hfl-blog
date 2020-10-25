@@ -1,0 +1,8 @@
+create table `article` (
+	`id` int not null auto_increment '设置主键自增',
+	`author` varchar(20) not null '作者',
+	`article_title` varchar(100) default null '文章标题',
+	`article_subtitle` varchar(100) default null '文章副标题',
+	`article_content` varchar(1000) default null '文章内容',
+	primary key (`id`) using btree  
+) engine=innoDB default charset=utf8mb4;
