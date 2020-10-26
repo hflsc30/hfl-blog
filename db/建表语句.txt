@@ -1,8 +1,59 @@
-create table `article` (
-	`id` int not null auto_increment '设置主键自增',
-	`author` varchar(20) not null '作者',
-	`article_title` varchar(100) default null '文章标题',
-	`article_subtitle` varchar(100) default null '文章副标题',
-	`article_content` varchar(1000) default null '文章内容',
-	primary key (`id`) using btree  
-) engine=innoDB default charset=utf8mb4;
+create table `t_catalog` (
+    `id` int(11) not null auto_increment comment 'ID',
+    `name` varchar(100) default null comment '栏目名称',
+    `catalog_type` smallint(6) default null comment '栏目类型-dic(catalogType)',
+    `content_type` smallint(6) default null comment '栏目内容类型-dic(contentType)',
+    `comment_type` smallint(6) default null comment '评论方式-dic(commentType)',
+    `is_allow_like` tinyint(1) not null default '0' comment '是否允许点赞',
+    `is_allow_share` tinyint(1) not null default '0' comment '是否允许分享',
+    `parent_id` int(11) default null comment '上级ID',
+    `lv` int(11) default null comment '层级',
+    `id_path` varchar(1000) default null comment 'ID路径',
+    `name_path` varchar(1000) default null comment '名称路径',
+    `is_leaf` tinyint(1) not null default '1' comment '是否为叶节点',
+    `root_id` int(11) default null comment '根节点ID',
+    `order_num` int(11) default null comment '排序号',
+    `is_show` tinyint(1) not null default '1' comment '是否显示',
+    `is_available` tinyint(1) not null default '1' comment '是否可用',
+    `is_system` tinyint(1) not null default '0' comment '是否系统栏目(只针对一级栏目)',
+    `insert_time` timestamp null default null comment '插入时间',
+    `update_time` timestamp null default null comment '更新时间',
+    primary key (`id`),
+    key `ak_catalog_parentId` (`parent_id`)
+)engine=innoDB default charset=utf8mb4 comment='栏目';
+
+create table `t_article` (
+	`id` int(11) not null auto_increment comment 'ID',
+	`catalog_id` int(11) default null comment '栏目ID-ref(t_catalog)',
+	`author` varchar(20) not null comment '作者',
+	`article_title` varchar(100) default null comment '文章标题',
+	`article_subtitle` varchar(100) default null comment '文章副标题',
+	`tags` varchar(100) default null comment 'TAG标签',
+	`keywords` varchar(100) default null comment '关键词',
+	`digest` varchar(1000) default null comment '摘要',
+	`image_list` varchar(3000) default null comment '图片列表',
+	`is_show_release_time` tinyint(1) not null default '1' comment '是否显示发布时间',
+	`is_top` tinyint(1) not null default '0' comment '是否置顶',
+    `top_num` int(11) default null comment '置顶级别',
+    `top_end_time` timestamp null default null comment '置顶结束时间',
+    `is_recommend` tinyint(1) not null default '0' comment '是否推荐',
+    `recommend_num` int(11) default null comment '推荐级别',
+    `recommend_end_time` timestamp null default null comment '推荐结束时间',
+    `is_commentable` tinyint(1) not null default '0' comment '是否允许评论',
+	`article_content` varchar(1000) default null comment '文章内容',
+	`source` varchar(100) default null comment '来源',
+    `source_url` varchar(500) default null comment '来源URL',
+    `order_num` int(11) default null comment '排序号',
+    `click_count` int(11) default null comment '点击次数',
+    `agree_count` int(11) default null comment '点赞次数',
+    `share_count` int(11) default null comment '分享次数',
+    `release_time` timestamp null default null comment '发布时间',
+    `release_user` int(11) default null comment '发布人-ref(t_user)',
+    `is_delete` tinyint(1) NOT null default '0' comment '是否删除',
+    `insert_time` timestamp null default null comment '插入时间',
+    `update_time` timestamp null default null comment '更新时间',
+	primary key (`id`) using btree,
+    KEY `ak_article_catalogId` (`catalog_id`)
+) engine=innoDB default charset=utf8mb4 comment='CMS文章';
+
+ALTER TABLE t_article ADD column `article_type` int(11) default null comment '文章类型-dic(articleType)' after `catalog_id`;
