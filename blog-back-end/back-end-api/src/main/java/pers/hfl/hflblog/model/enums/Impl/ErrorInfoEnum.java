@@ -14,6 +14,8 @@ public enum ErrorInfoEnum implements IErrorInfo {
     MISSING_PARAMETERS(4004, "参数缺失"),
     // 未知错误
     UNKNOWN_ERROR(5000, "出现未知错误"),
+    // id找不到
+    INVALID_ID(4008, "你的id不合法"),
     // 找不到相应资源
     RESOURCES_NOT_FOUND(4003, "找不到相应资源");
 

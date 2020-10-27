@@ -19,8 +19,7 @@ import java.util.Date;
  **/
 @Data
 public class ArticleVO {
-    private Integer id;
-    private Integer catalog;
+    private Integer catalogId;
     private Integer articleType;
     private String author;
     private String articleTitle;

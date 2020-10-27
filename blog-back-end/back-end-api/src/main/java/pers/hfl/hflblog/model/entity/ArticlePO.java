@@ -1,5 +1,6 @@
 package pers.hfl.hflblog.model.entity;
 
+import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.Data;
@@ -16,10 +17,10 @@ import java.util.Date;
 @Data
 @TableName("t_article")
 public class ArticlePO implements Serializable {
-    private static final long serialVersionUID = -1849698844197610571L;
-    @TableId
+    private static final long serialVersionUID = 1L;
+    @TableId(value = "id",type = IdType.AUTO)
     private Integer id;
-    private Integer catalog;
+    private Integer catalogId;
     private Integer articleType;
     private String author;
     private String articleTitle;

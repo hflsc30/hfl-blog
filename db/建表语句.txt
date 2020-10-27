@@ -57,3 +57,34 @@ create table `t_article` (
 ) engine=innoDB default charset=utf8mb4 comment='CMS文章';
 
 ALTER TABLE t_article ADD column `article_type` int(11) default null comment '文章类型-dic(articleType)' after `catalog_id`;
+
+create table `t_dic` (
+    `id` int(11) not null auto_increment comment 'ID',
+    `dic_code` varchar(100) not null comment '字典代码',
+    `dic_name` varchar(100) default null comment '字典名称',
+    `dic_desc` varchar(1000) default null comment '字典描述',
+    `is_system` tinyint(1) not null default '1' comment '是否系统预设(不可更改)',
+    `is_available` tinyint(1) not null default '1' comment '是否可用',
+    `insert_time` timestamp null default null comment '插入时间',
+    `update_time` timestamp null default null comment '更新时间',
+    primary key (`id`),
+    unique key `uk_dic` (`dic_code`)
+)engine=innoDB default charset=utf8mb4 comment='系统字典';
+
+create table `t_dic_entry` (
+    `id` int(11) not null auto_increment comment 'ID',
+    `dic_id` int default null comment '字典ID',
+    `dic_code` varchar(100) not null comment '条目代码',
+    `entry_key` int(11) not null comment '条目key',
+    `entry_code` varchar(100) not null comment '条目代码',
+    `entry_name` varchar(100) default null comment '条目名称',
+    `entry_desc` varchar(1000) default null comment '条目描述',
+    `order_num` int(11) DEFAULT null comment '排序号',
+    `is_system` tinyint(1) not null default '1' comment '是否系统预设(不可改)',
+    `is_available` tinyint(1) not null default '1' comment '是否可用',
+    `insert_time` timestamp null default null comment '插入时间',
+    `update_time` timestamp null default null comment '更新时间',
+    primary key (`id`),
+    unique key `uk_dic_entry` (`dic_id`,`entry_key`),
+    key `ak_dicEntry_dicCode_entryKey` (`dic_code`,`entry_key`)
+)engine=innoDB default charset=utf8mb4 comment='系统字典条目';
