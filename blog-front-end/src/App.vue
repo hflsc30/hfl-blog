@@ -1,30 +1,46 @@
 <template>
-  <div id="nav">
-    <router-link to="/">Home</router-link> |
-    <router-link to="/about">About</router-link>
+  <div id="app">
+    <nav-menu />
+    <router-view />
   </div>
-  <router-view/>
 </template>
 
+<script>
+export default {
+  name: "App",
+  data() {
+    return {};
+  },
+  components: {
+    NavMenu: () => import("@/components/navMenu.vue")
+  }
+};
+</script>
+
 <style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
+.main-text {
+  text-decoration: none;
+  color: #303133;
 }
-
-#nav {
-  padding: 30px;
+.comm-text {
+  text-decoration: none;
+  color: #606266;
 }
-
-#nav a {
-  font-weight: bold;
-  color: #2c3e50;
+.secondary-text {
+  text-decoration: none;
+  color: #909399;
+  font-size: 13px;
 }
-
-#nav a.router-link-exact-active {
-  color: #42b983;
+.space-text {
+  text-decoration: none;
+  color: #c0c4cc;
+  font-size: 13px;
+}
+.link {
+  text-decoration: none;
+}
+.link:hover {
+  cursor: pointer;
+  color: #409eff;
 }
 </style>

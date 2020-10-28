@@ -12,6 +12,7 @@ import org.hibernate.validator.constraints.Range;
 import pers.hfl.hflblog.model.entity.ArticlePO;
 
 import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 import java.util.Date;
 
 /**
@@ -62,6 +63,7 @@ public class ArticleDTO {
         @Override
         public ArticlePO convertToVO(ArticleDTO articleDTO) {
             ArticlePO po = new ArticlePO();
+            po.setClickCount(0);
             po.setUpdateTime(new Date(System.currentTimeMillis()));
             BeanUtil.copyProperties(articleDTO, po);
             return po;

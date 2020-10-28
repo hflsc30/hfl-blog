@@ -7,3 +7,5 @@ spring:
 logging:
   level:
     pers.hfl.hflblog.dao: trace
+setting:
+  path: blog-back-end/back-end-api/src/main/resources/hflblog.setting

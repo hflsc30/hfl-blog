@@ -8,14 +8,16 @@ import io.swagger.annotations.ApiParam;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import pers.hfl.hflblog.model.dto.ArticleDTO;
-import pers.hfl.hflblog.model.entity.ArticlePO;
 import pers.hfl.hflblog.model.vo.ArticleVO;
 import pers.hfl.hflblog.model.vo.PageVO;
 import pers.hfl.hflblog.model.vo.Results;
+import pers.hfl.hflblog.model.vo.TimelineVO;
 import pers.hfl.hflblog.service.ArticleService;
 
 import javax.validation.Valid;
+import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 /**
  * @ClassName ArticleController
@@ -54,7 +56,7 @@ public class ArticleController {
     @ApiOperation("根据id查询文章信息")
     @ApiImplicitParam(name = "id", value = "文章id", required = true, dataType = "Integer", paramType = "path")
     public Results<ArticleVO> getArticle(@PathVariable Integer id) {
-        ArticleVO articleVO = articleService.findById(id);
+        ArticleVO articleVO = articleService.getById(id);
         return Results.ok(articleVO);
     }
 
@@ -75,5 +77,31 @@ public class ArticleController {
             @PathVariable Integer id) {
         articleService.updateArticle(articleDTO, id);
         return Results.ok("更新成功", MapUtil.of("id", id));
+    }
+
+    @ApiOperation("获取文章标签")
+    @GetMapping("/tags")
+    public Results<Set<String>> findTags() {
+        return Results.ok(articleService.findTags());
+    }
+
+    @GetMapping("/tag/{name}")
+    @ApiOperation("根据标签查询文章集合")
+    @ApiImplicitParam(name = "name", value = "标签名称", required = true, dataType = "String", paramType = "path")
+    public Results<PageVO<ArticleVO>> findArticle(
+            @PathVariable("name") String tagName,
+            @ApiParam("页码")
+            @RequestParam(required = false, defaultValue = "1") Integer page,
+            @ApiParam("每页存放的记录数")
+            @RequestParam(required = false, defaultValue = "5") Integer limit) {
+        PageVO<ArticleVO> pv = articleService.findArticleByTag(tagName, page, limit);
+        return Results.ok(pv);
+    }
+
+    @GetMapping("/timeline")
+    @ApiOperation("获取文章时间线")
+    public Results<List<TimelineVO>> getTimeline() {
+        List<TimelineVO> timeline = articleService.timeline();
+        return Results.ok(timeline);
     }
 }
