@@ -11,8 +11,12 @@
     "axios": "^0.21.0",
     "core-js": "^3.6.5",
     "element-ui": "^2.13.2",
+    "github-markdown-css": "^4.0.0",
+    "moment": "^2.29.1",
+    "showdown-highlight": "^2.1.5",
     "vue": "^2.6.12",
     "vue-router": "^3.4.8",
+    "vue-showdown": "^2.4.1",
     "vue-template-compiler": "^2.6.12",
     "vuex": "^3.5.1"
   },

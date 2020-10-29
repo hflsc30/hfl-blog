@@ -31,10 +31,10 @@ public class ArticleDTO {
     @ApiModelProperty(notes = "文章标题", example = "三体")
     private String articleTitle;
     @NotEmpty(message = "标签不能为空")
-    @ApiModelProperty(notes = "标签", example = "科幻，长篇小说")
+    @ApiModelProperty(notes = "标签", example = "科幻,长篇小说")
     private String tags;
     @NotEmpty(message = "关键词不能为空")
-    @ApiModelProperty(notes = "关键词", example = "黑洞,维度，未来")
+    @ApiModelProperty(notes = "关键词", example = "黑洞,维度,未来")
     private String keywords;
     @NotEmpty(message = "摘要不能为空")
     @ApiModelProperty(notes = "摘要", example = "三体是描绘......")

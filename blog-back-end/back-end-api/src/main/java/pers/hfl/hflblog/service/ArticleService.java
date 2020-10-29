@@ -22,7 +22,7 @@ public interface ArticleService {
      * @param limit 一页显示的行数
      * @return 返回文章
      */
-    PageVO<ArticleVO> getArticles(int page, int limit);
+    PageVO<ArticleVO> findArticles(int page, int limit);
 
     /**
      * 新建文章

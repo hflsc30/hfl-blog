@@ -33,12 +33,12 @@ public class ArticleController {
 
     @ApiOperation("批量获取文章")
     @GetMapping("/articles")
-    public Results<PageVO> getArticles(
+    public Results<PageVO> findArticles(
             @ApiParam("页码")
             @RequestParam(required = false, defaultValue = "1") Integer page,
             @ApiParam("每页存放的记录数")
             @RequestParam(required = false, defaultValue = "5") Integer limit) {
-        return Results.ok(articleService.getArticles(page, limit));
+        return Results.ok(articleService.findArticles(page, limit));
     }
 
     @PostMapping("/articles")

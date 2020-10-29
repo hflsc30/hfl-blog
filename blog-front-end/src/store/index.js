@@ -1,5 +1,8 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
+import request from "@/http/request";
+// Notification 实现消息提示的功能
+import {Notification} from "element-ui";
 
 Vue.use(Vuex);
 
@@ -7,6 +10,7 @@ const store = new Vuex.Store({
   state:{
     token: window.sessionStorage.getItem("token"),
     userInfo: null,
+    blogInfo: null,
   },
   mutations:{
     setToken(state,token){
@@ -21,8 +25,30 @@ const store = new Vuex.Store({
     setUserInfo(state,userInfo){
       state.userInfo =userInfo;
     },
+    setBlogInfo(state,blogInfo){
+      state.blogInfo =blogInfo;
+    }
   },
-  actions:{}
+  actions:{
+    getBlogInfo({commit}){
+      request.getBlogInfo().then(res=>{
+        if (res.code===0){
+          commit('setBlogInfo',res.data)
+        }else {
+          Notification.error({
+            title: '提示',
+            message: res.msg,
+          });
+        }
+      }).catch(err=>{
+        console.log(err);
+        Notification.error({
+          title: '提示',
+          message: '服务器忙，获取博客信息失败',
+        });
+      })
+    }
+  }
 })
 
 export default store;

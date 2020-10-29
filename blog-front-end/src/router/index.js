@@ -44,6 +44,15 @@ const routes = [
       title: "留言板",
     }
   },
+  {
+    path: "/post/:id",
+    name: "article",
+    component: () => import("@/views/article/article.vue"),
+    meta: {
+      title: "文章详情",
+    },
+  },
+
 ]
 
 const router = new VueRouter({
@@ -58,5 +67,11 @@ router.beforeEach((to,from,next)=>{
   }
   next();
 });
+
+const originalPush = VueRouter.prototype.push
+VueRouter.prototype.push = function push(location) {
+  return originalPush.call(this, location).catch(err => err)
+}
+
 
 export default router;

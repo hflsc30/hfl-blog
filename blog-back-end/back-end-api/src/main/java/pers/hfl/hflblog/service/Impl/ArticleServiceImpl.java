@@ -32,7 +32,7 @@ public class ArticleServiceImpl implements ArticleService {
     private ArticleMapper articleMapper;
 
     @Override
-    public PageVO<ArticleVO> getArticles(int page, int limit) {
+    public PageVO<ArticleVO> findArticles(int page, int limit) {
         QueryWrapper<ArticlePO> qw = new QueryWrapper<>();
         qw.select(ArticlePO.class, i -> !"content".equals(i.getColumn()));
         Page<ArticlePO> res = articleMapper.selectPage(new Page<>(page, limit), qw);

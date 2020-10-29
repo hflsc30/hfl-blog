@@ -19,12 +19,13 @@ import java.util.Date;
  **/
 @Data
 public class ArticleVO {
+    private Integer id;
     private Integer catalogId;
     private Integer articleType;
     private String author;
     private String articleTitle;
     private String articleSubtitle;
-    private String tags;
+    private String[] tags;
     private String keywords;
     private String digest;
     private String imageList;
@@ -68,7 +69,9 @@ public class ArticleVO {
         public ArticleVO convertToVO(ArticlePO article) {
             final ArticleVO vo = new ArticleVO();
             BeanUtil.copyProperties(article, vo, CopyOptions.create().ignoreNullValue().ignoreError());
-            vo.setTags(article.getTags());
+            if (!article.getTags().isEmpty()) {
+                vo.setTags(article.getTags().split(","));
+            }
             return vo;
         }
     }
