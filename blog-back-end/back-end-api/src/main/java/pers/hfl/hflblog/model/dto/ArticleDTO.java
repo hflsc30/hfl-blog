@@ -12,7 +12,6 @@ import org.hibernate.validator.constraints.Range;
 import pers.hfl.hflblog.model.entity.ArticlePO;
 
 import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.NotNull;
 import java.util.Date;
 
 /**

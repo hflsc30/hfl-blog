@@ -2,10 +2,14 @@
   <div>
     <div>
       <el-row>
-        <el-page-header
-          @back="goBack"
-          content="详情页面"
-        />
+        <div style="height: 40px;display: flex;align-items: center">
+          <div>
+            <el-page-header
+              @back="goBack"
+              content="详情页面"
+            />
+          </div>
+        </div>
         <el-col
           :span="20"
           :offset="2"

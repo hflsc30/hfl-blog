@@ -16,6 +16,8 @@ public enum ErrorInfoEnum implements IErrorInfo {
     UNKNOWN_ERROR(5000, "出现未知错误"),
     // id找不到
     INVALID_ID(4008, "你的id不合法"),
+    // 登录错误信息
+    USERNAME_PASSWORD_ERROR(4009, "用户名或密码错误"),
     // 找不到相应资源
     RESOURCES_NOT_FOUND(4003, "找不到相应资源");
 

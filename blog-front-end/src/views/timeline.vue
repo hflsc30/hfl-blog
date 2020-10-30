@@ -33,7 +33,6 @@
 
 <script>
 import request from "@/http/request";
-import moment from "moment";
 export default {
   name: "Timeline",
   data(){
@@ -45,9 +44,6 @@ export default {
     request.getTimeline().then(res=>{
       if(res.code===0){
         this.timelineData=res.data;
-        this.timelineData.forEach(item=>{
-          item.insertTime = moment(item.insertTime).format('YYYY-MM-DD HH:ss');
-        });
       }else {
         this.$notify.error({
           title: '提示',
